@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Compucast Assitant</title>
+	<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+	<style type="text/css">
+
+		body { width:14em; font-size:initial; }
+
+		label { display:flex; margin:0.5em 0; }
+		label > span { flex-grow:1; }
+
+		[data-type="tri-switch"] { position:relative; background-color:#ccc; width:2em; height:1em; border-radius:0.5em; transition: 0.4s; }
+		[data-type="tri-switch"]:before { position:absolute; content:""; width:0.75em; height:0.75em; left:0.625em; bottom:0.125em; background-color:white; border-radius:50%; transition: 0.4s; }
+		[data-type="tri-switch"]:hover:before { background-color:#EEE; box-shadow: 0 0 3px black; width: 0.85em; height: 0.85em; left: 0.575em; bottom: 0.075em; }
+		[data-type="tri-switch"][data-value=off] { background-color:red; }
+		[data-type="tri-switch"][data-value=off]:before { left:0.125em; }
+		[data-type="tri-switch"][data-value=off]:hover:before { left:0.075em; }
+		[data-type="tri-switch"][data-value=on] { background-color:lightgreen; }
+		[data-type="tri-switch"][data-value=on]:before { left:1.125em; }
+		[data-type="tri-switch"][data-value=on]:before { left:1.125em; }
+
+		[data-type="dual-switch"] { position:relative; background-color:#ccc; width:2em; height:1em; border-radius:0.5em; transition: 0.4s; }
+		[data-type="dual-switch"]:before { position:absolute; content:""; width:0.75em; height:0.75em; left:0.125em; bottom:0.125em; background-color:white; border-radius:50%; transition: 0.4s; }
+		[data-type="dual-switch"]:hover:before { background-color:#EEE; box-shadow: 0 0 3px black; width: 0.85em; height: 0.85em; left: 0.075em; bottom: 0.075em; }
+		[data-type="dual-switch"][data-value=on] { background-color:lightgreen; }
+		[data-type="dual-switch"][data-value=on]:before { left:1.125em; }
+		[data-type="dual-switch"][data-value=on]:hover:before { left: 1.075em; }
+
+
+
+		button#reset { width:100%; font-size:1em; margin-top:0.5em; }
+	</style>
+</head>
+<body>
+
+	<label>
+		<span>Mod_Pagespeed</span>
+		<div data-type="tri-switch" data-key="ModPagespeed" data-value="undefined"></div>
+	</label>
+
+	<label>
+		<span>Admin</span>
+		<div data-type="dual-switch" data-key="admin" data-value="undefined"></div>
+	</label>
+
+	<label>
+		<span>Debug</span>
+		<div data-type="dual-switch" data-key="debug" data-value="undefined"></div>
+	</label>
+
+	<button id="reset"><i class="fa fa-undo" aria-hidden="true"></i> Reset domain</button>
+
+	<script src="popup.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+Options page to fill in the user credentials
+	can choose between Compucast staff or client
+	some way for us to clear our login, or use it temporarily while on-site
+	MFA?
+
+Optional permissions for individual domains:
+	https://developer.chrome.com/apps/permissions
+	remove the <all_urls> from 'permissions' and move to 'optional_permissions'
+
+
+Integrate toggle-dev bookmarklet:
+	some way to scrape a site?
+
+Autoupdate:
+	https://developer.chrome.com/extensions/autoupdate
+
+Move to Chrome Store
+
