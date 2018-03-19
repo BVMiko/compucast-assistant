@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Copy external files into the repository
+
+files=(
+	'../Font-Awesome-Pro/web-fonts-with-css/css/fontawesome-all.min.css' 'css/fontawesome-all.min.css'
+	'../Font-Awesome-Pro/web-fonts-with-css/webfonts/fa-brands-400.woff2' 'webfonts/fa-brands-400.woff2'
+	'../Font-Awesome-Pro/web-fonts-with-css/webfonts/fa-light-300.woff2' 'webfonts/fa-light-300.woff2'
+	'../Font-Awesome-Pro/web-fonts-with-css/webfonts/fa-regular-400.woff2' 'webfonts/fa-regular-400.woff2'
+	'../Font-Awesome-Pro/web-fonts-with-css/webfonts/fa-solid-900.woff2' 'webfonts/fa-solid-900.woff2'
+)
+
+for ((i=0; i<${#files[@]}; i += 2)); do
+	echo -n "Copy ${files[i]} to ${files[i+1]}... "
+	cp -r "${files[i]}" "${files[i+1]}"
+	echo "[✔]"
+
+	echo -n "Add ${files[i+1]} to repository... "
+	git add -f "${files[i+1]}"
+	echo "[✔]"
+done
+
+exit 0
