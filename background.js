@@ -133,8 +133,8 @@ function implodeQueryString(bits) {
 
 var domainMods = [];
 chrome.storage.local.get(["domainMods"], function(items){
-	if ('domainMods' in items) {
-		domainMods = items['domainMods'];
+	if ("domainMods" in items) {
+		domainMods = items["domainMods"];
 	}
 });
 
@@ -142,17 +142,42 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
 	var parser = document.createElement("a");
 	parser.href = details.url;
 
+	// Special stuff for Google Analytics
+	if (["www.google-analytics.com", "ssl.google-analytics.com", "stats.g.doubleclick.net", "www.google-analytics.com"].includes(parser.hostname)) {
+		var initparser = document.createElement("a");
+		initparser.href = details.initiator;
+		currMods = domainMods[initparser.hostname];
+
+		if ("ga_debug" in currMods && currMods["ga_debug"] != undefined) {
+			var newpathname = parser.pathname;
+			if (parser.hostname == "www.google-analytics.com" && parser.pathname == "/ga.js") {
+				newpathname = "/u/ga_debug.js";
+			} else if (parser.hostname == "ssl.google-analytics.com" && parser.pathname == "/ga.js") {
+				newpathname = "/u/ga_debug.js";
+			} else if (parser.hostname == "stats.g.doubleclick.net" && parser.pathname == "/dc.js") {
+				newpathname = "/dc_debug.js";
+			} else if (parser.hostname == "www.google-analytics.com" && parser.pathname == "/analytics.js") {
+				newpathname = "/analytics_debug.js";
+			}
+
+			if (newpathname != parser.pathname) {
+				parser.pathname = newpathname;
+				return { redirectUrl: parser.href };
+			}
+		}
+	}
+
 	if (parser.hostname in domainMods) {
 		currMods = domainMods[parser.hostname];
 		var exploded = explodeQueryString(parser.search);
 		if ("ModPagespeed" in currMods && currMods["ModPagespeed"] != undefined) {
-			exploded['ModPagespeed'] = currMods["ModPagespeed"];
+			exploded["ModPagespeed"] = currMods["ModPagespeed"];
 		}
 		if ("admin" in currMods && currMods["admin"] != undefined) {
-			exploded['admin'] = undefined;
+			exploded["admin"] = undefined;
 		}
 		if ("debug" in currMods && currMods["debug"] != undefined) {
-			exploded['debug'] = undefined;
+			exploded["debug"] = undefined;
 		}
 
 		var imploded = implodeQueryString(exploded);
@@ -168,8 +193,6 @@ chrome.permissions.getAll(function(perm) {
 	// console.log(perm);
 });
 
-
-
 function updateDomainMods(hostname, mod, value) {
 	if (mod === undefined) {
 		delete domainMods[hostname];
@@ -184,7 +207,16 @@ function updateDomainMods(hostname, mod, value) {
 }
 
 
+chrome.runtime.onInstalled.addListener(function(details){
+	if(details.reason == "install") {
+		console.log("This is a first install!");
+	} else if(details.reason == "update") {
+		var thisVersion = chrome.runtime.getManifest().version;
+		console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
+	}
 
+
+});
 
 
 // chrome.webRequest.onBeforeSendHeaders.addListener(
