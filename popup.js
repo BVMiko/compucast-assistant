@@ -51,10 +51,10 @@ function tri_switch_click(e) {
 
 }
 
-toggle_pagespeed.addEventListener('click', tri_switch_click);
-toggle_admin.addEventListener('click', dual_switch_click);
-toggle_debug.addEventListener('click', dual_switch_click);
-toggle_ga_debug.addEventListener('click', dual_switch_click);
+toggle_pagespeed.addEventListener("click", tri_switch_click);
+toggle_admin.addEventListener("click", dual_switch_click);
+toggle_debug.addEventListener("click", dual_switch_click);
+toggle_ga_debug.addEventListener("click", dual_switch_click);
 
 
 // document.querySelector('button#reset').addEventListener('click', function(e) {
