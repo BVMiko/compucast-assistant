@@ -1,6 +1,6 @@
 {
 	"name": "Compucast Assistant",
-	"version": "0.0.1.8",
+	"version": "0.0.1.9",
 	"description": "Helper for common Compucast website activities",
 	"author": "Brian Villemarette <BVMiko@gmail.com>",
 	"icons": {
@@ -9,7 +9,16 @@
 		"128": "compucast.png"
 	},
 
-	"permissions": [ "activeTab", "tabs", "storage", "webRequest", "webRequestBlocking", "http://www.compucast.com/*", "<all_urls>" ],
+	"permissions": [
+		"identity",
+		"activeTab",
+		"tabs",
+		"storage",
+		"webRequest",
+		"webRequestBlocking",
+		"http://www.compucast.com/*",
+		"<all_urls>"
+	],
 
 	"optional_permissions": [ "<all_urls>" ],
 
@@ -27,6 +36,10 @@
 		"page": "options.html",
 		"chrome_style": true
 	},
-
+	"key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsGo0tPCVql3/psMYAa4S1qcqAAAJ6rAFYBCsQzO3JUWnJODMauQf7BcNI9UmbzDZQbVGZ017Gf1ORlISy/3EEg+w2oiKgBBZsjxBEjNF6UCX4vLiyO0lxEFJecmGY15UhZ/Bk2vilHhE7kfxW1Zaaa3AoULGT7Vfj/Hp0WmDmb0RJwag6DAJPQOsRC/Oiuq0iW1TYFK5xcQINrJZKzNL5YypbNecezjfub0GzqjL7wv1ZKasdYOrDqAT8ycKZKdZ5iAaV1OVj9gKnGo2+LXCMNvDGiJZJk5u/CzxhHOOXQGANRCASfWEqranSRkeHqvvo2qSq9InS54qcA5ocO/GLwIDAQAB",
+	"oauth2": {
+		"client_id": "413943676326-klu08jdlo3r5c412qic90qkknord985q.apps.googleusercontent.com",
+		"scopes": [""]
+	},
 	"manifest_version": 2
 }

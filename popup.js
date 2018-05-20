@@ -70,3 +70,11 @@ toggle_ga_debug.addEventListener("click", dual_switch_click);
 // });
 
 
+// Temp test for oauth
+document.querySelector('button#oauth').addEventListener('click', function() {
+	chrome.identity.getAuthToken({interactive: true}, function(token) {
+		console.log(token);
+	});
+});
+
+
