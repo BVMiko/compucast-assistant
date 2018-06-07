@@ -16,13 +16,8 @@ chrome.webRequest.onBeforeRequest.addListener(function(details) {
 	var parser = new URL(details.url);
 	if (ga_debug && parser.hostname in ga_map && ga_map[parser.hostname].from == parser.pathname) {
 		parser.pathname = ga_map[parser.hostname].to;
-		console.log('yes');
 		return { redirectUrl: parser.href };
 	}
-if (parser.hostname in ga_map && ga_map[parser.hostname].from == parser.pathname) {
-console.log('no');
-}
-
 }, {urls: ["<all_urls>"]}, ["blocking"]);
 
 // For domain modifiers (per-domain)
