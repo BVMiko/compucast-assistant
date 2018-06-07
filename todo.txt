@@ -11,8 +11,3 @@ Optional permissions for individual domains:
 Integrate toggle-dev bookmarklet:
 	some way to scrape a site?
 
-Autoupdate:
-	https://developer.chrome.com/extensions/autoupdate
-
-Move to Chrome Store
-
