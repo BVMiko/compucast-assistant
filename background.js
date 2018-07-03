@@ -35,6 +35,19 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
 	}
 }, {urls: ["<all_urls>"]}, ["blocking", "requestHeaders"]);
 
+// For detecting on every pageload to check for highlighting links
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+	if (changeInfo.status == 'complete') {
+		url = new URL(tab.url);
+		if (url.hostname in domains && "debug" in domains[url.hostname]) {
+			chrome.tabs.insertCSS(tabId, {file:"compucast-assistant-inpage.css"});
+			chrome.tabs.executeScript(tabId, {file:"compucast-assistant-inpage.js"}, function(ret) {
+				chrome.browserAction.setBadgeText({'text': ret[0].text, 'tabId':tabId});
+				chrome.browserAction.setBadgeBackgroundColor({'color': ret[0].color, 'tabId':tabId});
+			});
+		}
+	}
+});
 
 // chrome.permissions.getAll(function(perm) {
 // 	// console.log(perm);
