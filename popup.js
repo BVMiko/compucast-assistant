@@ -5,6 +5,7 @@ var currentTabUrl = null;
 var toggle_pagespeed = document.querySelector('[data-key="PageSpeed"]');
 var toggle_admin = document.querySelector('[data-key="admin"]');
 var toggle_debug = document.querySelector('[data-key="debug"]');
+var toggle_tracking = document.querySelector('[data-key="tracking"]');
 var toggle_ga_debug = document.querySelector('[data-key="ga_debug"]');
 
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -17,6 +18,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		if ("PageSpeed" in background.domains[currentTabUrl.hostname]) toggle_pagespeed.dataset.value = background.domains[currentTabUrl.hostname]["PageSpeed"];
 		if ("admin" in background.domains[currentTabUrl.hostname]) toggle_admin.dataset.value = background.domains[currentTabUrl.hostname]["admin"];
 		if ("debug" in background.domains[currentTabUrl.hostname]) toggle_debug.dataset.value = background.domains[currentTabUrl.hostname]["debug"];
+		if ("tracking" in background.domains[currentTabUrl.hostname]) toggle_tracking.dataset.value = background.domains[currentTabUrl.hostname]["tracking"];
 	} else {
 		// authorize tab via optional permissions!!
 	}
@@ -54,9 +56,37 @@ function ga_debug_switch_click(e) {
 	chrome.tabs.reload(currentTab.id, { bypassCache:true });
 }
 
+// function tracking_switch_click(e) {
+// 	if (this.dataset.value === undefined) {
+// 		this.dataset.value = "on";
+// 	} else {
+// 		delete(this.dataset.value);
+// 	}
+// 	background.tracking = this.dataset.value !== undefined;
+// 	// chrome.tabs.reload(currentTab.id, { bypassCache:true });
+// 	// chrome.runtime.onMessage.addListener(tracking_listener);
+// 		chrome.tabs.executeScript({
+// 			code: 'document.body.style.backgroundColor="orange"'
+// 		});
+
+
+// }
+
+// function tracking_listener(message, callback) {
+// 	// if (message == "changeColor"){
+// 		chrome.tabs.executeScript({
+// 			code: 'document.body.style.backgroundColor="orange"'
+// 		});
+// 	// }
+// }
+
+
+
+
 toggle_pagespeed.addEventListener("click", tri_switch_click);
 toggle_admin.addEventListener("click", dual_switch_click);
 toggle_debug.addEventListener("click", dual_switch_click);
+toggle_tracking.addEventListener("click", dual_switch_click);
 toggle_ga_debug.addEventListener("click", ga_debug_switch_click);
 
 

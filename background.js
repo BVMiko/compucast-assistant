@@ -39,9 +39,9 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	if (changeInfo.status == 'complete') {
 		url = new URL(tab.url);
-		if (url.hostname in domains && "debug" in domains[url.hostname]) {
-			chrome.tabs.insertCSS(tabId, {file:"compucast-assistant-inpage.css"});
-			chrome.tabs.executeScript(tabId, {file:"compucast-assistant-inpage.js"}, function(ret) {
+		if (url.hostname in domains && "tracking" in domains[url.hostname]) {
+			chrome.tabs.insertCSS(tabId, {file:"inpage.css"});
+			chrome.tabs.executeScript(tabId, {file:"inpage.js"}, function(ret) {
 				chrome.browserAction.setBadgeText({'text': ret[0].text, 'tabId':tabId});
 				chrome.browserAction.setBadgeBackgroundColor({'color': ret[0].color, 'tabId':tabId});
 			});

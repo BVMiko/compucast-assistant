@@ -1,0 +1,11 @@
+@keyframes spin {
+	from { transform:rotate(0deg); }
+	to { transform:rotate(360deg); }
+}
+
+.note-box { position:absolute; border-width:4px; border-style:solid; border-radius:10px; pointer:cursor; }
+.note-box:hover { border-bottom-right-radius: 0; }
+.note-box:hover>span { display:block; }
+.note-box>span { display:none; position:absolute; right:-4px; top:calc(100% + 2px); text-align:right; padding:0.2em 0.4em; border-radius:0 0 10px 10px; color:white; font-weight:bold; white-space:nowrap; z-index:999; }
+.note-box.stay-open { border-bottom-right-radius: 0; border-width:2px; opacity:0.8; }
+.note-box.stay-open>span { display:block; right:-2px; top:100%; }

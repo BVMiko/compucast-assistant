@@ -1,5 +1,7 @@
 // console.log('inside inpage.js');
 
+ret = {color:'green', count:0};
+
 function pointerevents_none() {
 	this.classList.add('stay-open');
 	this.style.pointerEvents = "none";
@@ -30,8 +32,14 @@ allanchors.forEach(function(el) {
 	var notecolor = null;
 
 	if (gaobj = el.closest('[data-ga-id]')) {
-		note.push('ID: ' + gaobj.getAttribute('data-ga-id'));
-		notecolor = 'green';
+		idno = parseInt(gaobj.getAttribute('data-ga-id'));
+		if (!isNaN(idno)) {
+			note.push('ID: ' + gaobj.getAttribute('data-ga-id'));
+			notecolor = 'green';
+		} else {
+			note.push('ID: EMPTY!');
+			notecolor = 'red';
+		}
 		// ecdata = this.buildECData(gaobj, !samedomain);
 		// ga.trackers.promo('interaction', [ecdata]);
 	}
@@ -80,6 +88,6 @@ window.addEventListener("optimizedResize", function() {
 
 
 
-
-x={color:"#B00", text:"3"};
-x
+ret.text = ret.count.toString();
+// This is how we send the return value
+ret
