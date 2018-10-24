@@ -7,6 +7,8 @@ var toggle_admin = document.querySelector('[data-key="admin"]');
 var toggle_debug = document.querySelector('[data-key="debug"]');
 var toggle_tracking = document.querySelector('[data-key="tracking"]');
 var toggle_ga_debug = document.querySelector('[data-key="ga_debug"]');
+var button_toggle_dev = document.querySelector('button#toggle_dev');
+var button_domain_reset = document.querySelector('button#domain_reset');
 
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 	currentTab = tabs[0];
@@ -90,7 +92,25 @@ toggle_tracking.addEventListener("click", dual_switch_click);
 toggle_ga_debug.addEventListener("click", ga_debug_switch_click);
 
 
-// document.querySelector('button#reset').addEventListener('click', function(e) {
+
+button_toggle_dev.addEventListener('click', function(e) {
+	if (currentTabUrl.hostname.match(/\.compucastweb\.com$/)) {
+		currentTabUrl.hostname = currentTabUrl.hostname.replace(/\.compucastweb.com$/, '.com');
+	} else {
+		currentTabUrl.hostname = currentTabUrl.hostname.replace(/\.com$/, '.compucastweb.com');
+	}
+	chrome.tabs.update(currentTab.id, {url: currentTabUrl.href});
+});
+button_toggle_dev.addEventListener('auxclick', function(e) {
+	if (currentTabUrl.hostname.match(/\.compucastweb\.com$/)) {
+		currentTabUrl.hostname = currentTabUrl.hostname.replace(/\.compucastweb.com$/, '.com');
+	} else {
+		currentTabUrl.hostname = currentTabUrl.hostname.replace(/\.com$/, '.compucastweb.com');
+	}
+	// TODO: this pollutes the currentTabUrl variable
+	chrome.tabs.create({ url:currentTabUrl.href, active:false, index:currentTab.index+1 });
+});
+// button_domain_reset.addEventListener('click', function(e) {
 // 	background.updateDomain(currentTabUrl.hostname);
 
 // 	var exploded = background.explodeQueryString(currentTabUrl.search);

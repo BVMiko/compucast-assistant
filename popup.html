@@ -5,10 +5,14 @@
 	<link rel="stylesheet" type="text/css" href="/css/fontawesome-all.min.css">
 	<style type="text/css">
 
-		body { width:14em; font-size:initial; }
+		body { width:14em; font-size:initial; margin:0 0.8em; font-family:system-ui; }
+
+		fieldset { margin:0.8em 0; border:1px solid #ccc; }
 
 		label { display:flex; margin:0.5em 0; }
 		label > span { flex-grow:1; }
+
+		i.far, i.fas, i.fal, i.fab { width:1em; height:1em; margin-right:0.5em; }
 
 		[data-type="tri-switch"] { position:relative; background-color:#ccc; width:2em; height:1em; border-radius:0.5em; transition: 0.4s; }
 		[data-type="tri-switch"]::before { position:absolute; content:""; width:0.75em; height:0.75em; left:0.625em; bottom:0.125em; background-color:white; border-radius:50%; transition: 0.4s; }
@@ -27,10 +31,32 @@
 		[data-type="dual-switch"][data-value=on]::before { left:1.125em; }
 		[data-type="dual-switch"][data-value=on]:hover::before { left: 1.075em; }
 
-		button#reset { width:100%; font-size:1em; margin-top:0.5em; }
+		button { position:relative; margin:0 auto; border:none; border-radius:2px; padding:0 16px; text-align:center; text-transform:uppercase; color:#fff; background-color:#2196f3; box-shadow:0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); font-family:"Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system; font-size:14px; font-weight:500; line-height:36px; overflow:hidden; outline:none; cursor:pointer; transition:box-shadow 0.2s; }
+		button:hover,
+		button:focus { box-shadow:0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12); }
+		button:active { box-shadow:0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12); }
+		button:disabled { color:rgba(0, 0, 0, 0.38); background-color:rgba(0, 0, 0, 0.12); box-shadow:none; cursor:initial; }
+		button::before { content:""; position:absolute; left:0; right:0; top:0; bottom:0; background-color:currentColor; opacity:0; transition:opacity 0.2s; }
+		button:hover::before { opacity:0.12; }
+		button:focus::before { opacity:0.2; }
+		button:active::before { opacity:0.32; }
+		button:disabled::before { opacity:0; }
+		button::after { content:""; position:absolute; left:50%; top:18px; border-radius:50%; padding:50%; width:32px; height:32px; background-color:currentColor; opacity:0; transform:translate(-50%, -50%) scale(1) ; transition:opacity 1s, transform 0.5s; }
+		button:active::after { opacity:0.4; transform:translate(-50%, -50%) scale(0); transition:transform 0s; }
+		button:disabled::after { opacity:0; }
+
+		/*button { width:100%; padding:0.4em 0.8em; border-radius:0.7em; font-size:1em; }*/
+
+		/*button#reset { width:100%; font-size:1em; margin-top:0.5em; }*/
 	</style>
 </head>
 <body>
+	<fieldset>
+		<legend>This Tab</legend>
+		<label>
+			<button id="toggle_dev"><i class="far fa-eye" aria-hidden="true"></i> Toggle Dev</button>
+		</label>
+	</fieldset>
 	<fieldset>
 		<legend>This Domain</legend>
 		<label>
@@ -49,6 +75,9 @@
 			<span>Tracking Helper</span>
 			<div data-type="dual-switch" data-key="tracking"></div>
 		</label>
+<!-- 		<label>
+			<button id="domain_reset"><i class="fal fa-undo"></i> Reset domain</button>
+		</label> -->
 	</fieldset>
 	<fieldset>
 		<legend>Global</legend>
@@ -58,7 +87,6 @@
 		</label>
 	</fieldset>
 
-	<!-- <button id="reset"><i class="fal fa-undo"></i> Reset domain</button> -->
 	<!-- <button id="oauth"><i class="fal fa-undo"></i> Oauth</button> -->
 
 

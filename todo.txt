@@ -1,3 +1,7 @@
+Firefox functionality
+	https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Porting_a_Google_Chrome_extension
+	https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Chrome_incompatibilities
+
 Options page to fill in the user credentials
 	can choose between Compucast staff or client
 	some way for us to clear our login, or use it temporarily while on-site
